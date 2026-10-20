@@ -1,0 +1,239 @@
+/* =================================================================
+   styles.css — EL DISEÑO (TEMA OSCURO)
+   -----------------------------------------------------------------
+   Diseño simple: una sola columna centrada, fondo oscuro,
+   tarjetas un poco más claras y un solo color principal.
+   ================================================================= */
+
+
+/* ---------- Colores ----------
+   Se guardan en "variables" para no repetirlos.
+   Si cambias un color aquí, cambia en toda la página. */
+:root {
+  --fondo: #0f1115;      /* casi negro: fondo de la página */
+  --tarjeta: #1a1d23;    /* gris muy oscuro: tarjetas */
+  --campo: #12151a;      /* fondo de los inputs */
+  --texto: #e5e7eb;      /* texto principal (gris muy claro) */
+  --gris: #9ca3af;       /* texto secundario */
+  --borde: #2c313a;      /* líneas y bordes */
+  --principal: #2dd4bf;  /* verde azulado brillante */
+  --error: #f87171;      /* rojo suave */
+
+  /* Le dice al navegador que la página es oscura: así las flechitas
+     de los inputs numéricos y las barras de scroll también son oscuras. */
+  color-scheme: dark;
+}
+
+
+/* ---------- Base ---------- */
+
+/* El ancho de las cajas incluye su padding y borde (más fácil de medir). */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, 'Segoe UI', sans-serif;
+  background: var(--fondo);
+  color: var(--texto);
+}
+
+/* Los botones e inputs no heredan la letra por defecto; aquí lo forzamos. */
+button,
+input {
+  font: inherit;
+}
+
+/* Contenedor central: máximo 460px de ancho y centrado. */
+.contenedor {
+  max-width: 460px;
+  margin: 0 auto;
+  padding: 32px 16px;
+}
+
+
+/* ---------- Header ---------- */
+.header h1 {
+  margin: 0;
+  color: var(--principal);
+}
+
+.header p {
+  margin: 4px 0 24px;
+  color: var(--gris);
+}
+
+
+/* ---------- Botones de opciones (tipo de cálculo y moneda) ---------- */
+
+/* Grid de 2 columnas: los botones quedan de 2 en 2. */
+.tabs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.tab {
+  padding: 10px;
+  border: 1px solid var(--borde);
+  border-radius: 8px;
+  background: var(--tarjeta);
+  color: var(--texto);
+  cursor: pointer;
+}
+
+/* El botón seleccionado se pinta con el color principal. */
+.tab.activo {
+  background: var(--principal);
+  border-color: var(--principal);
+  color: var(--fondo);
+  font-weight: 600;
+}
+
+/* Dentro de una tarjeta, el último elemento no necesita espacio abajo. */
+.tarjeta > :last-child {
+  margin-bottom: 0;
+}
+
+
+/* ---------- Tarjetas ---------- */
+.tarjeta {
+  background: var(--tarjeta);
+  border: 1px solid var(--borde);
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 16px;
+}
+
+/* Texto pequeño gris que sirve de título dentro de una tarjeta. */
+.subtitulo {
+  margin: 0 0 10px;
+  color: var(--gris);
+  font-size: 14px;
+}
+
+
+/* ---------- Campos del formulario ---------- */
+.campo {
+  margin-bottom: 16px;
+}
+
+.campo label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.campo input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid var(--borde);
+  border-radius: 8px;
+  background: var(--campo);
+  color: var(--texto);
+}
+
+/* Borde de color cuando el usuario está escribiendo en el campo. */
+.campo input:focus {
+  outline: none;
+  border-color: var(--principal);
+}
+
+
+/* ---------- Resultado ---------- */
+.valor-resultado {
+  margin: 0;
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--principal);
+}
+
+/* "Equivale a ..." debajo del resultado principal. */
+.equivalente {
+  margin: 4px 0 16px;
+  color: var(--gris);
+  font-size: 14px;
+}
+
+/* Cada fila pone el texto a la izquierda y el monto a la derecha. */
+.fila {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-top: 1px solid var(--borde);
+}
+
+.nota {
+  margin: 12px 0 0;
+  font-size: 12px;
+  color: var(--gris);
+}
+
+.error {
+  margin: 0;
+  color: var(--error);
+}
+
+
+/* ---------- Botones de acción ---------- */
+
+/* Botón grande: "Guardar en historial". */
+.boton {
+  width: 100%;
+  margin-top: 12px;
+  padding: 10px;
+  border: 1px solid var(--principal);
+  border-radius: 8px;
+  background: transparent;
+  color: var(--principal);
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.boton:hover {
+  background: var(--principal);
+  color: var(--fondo);
+}
+
+/* Botón que parece solo texto: "Borrar todo". */
+.boton-texto {
+  border: none;
+  background: none;
+  color: var(--error);
+  font-size: 14px;
+  cursor: pointer;
+}
+
+
+/* ---------- Historial ---------- */
+.historial-encabezado {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+/* Quitamos los puntos y el espacio que trae la lista por defecto. */
+.historial {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.historial li {
+  padding: 10px 0;
+  border-top: 1px solid var(--borde);
+}
+
+.fila-historial {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.historial small {
+  color: var(--gris);
+  font-size: 12px;
+}
